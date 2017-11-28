@@ -1,17 +1,19 @@
 'use strict';
 
+// Load template first
 Ajax.getDOM('../item/item.template.html').then((template) => {
     let itemsList = document.getElementById('items-list');
 
     function refreshItemsEverySecond(items) {
         itemsList.innerHTML = '';
         for(let i = 0; i < items.length; ++i) {
-            let templateClone = template.cloneNode(true); // Deep copy
+            let templateClone = template.cloneNode(true); // Deep copy the template
             templateClone.querySelector('.item__name').innerHTML = items[i].name;
             // And so on for all other properties...
             itemsList.appendChild(templateClone);
         }
 
+        // Rerun after one second
         setTimeout(refreshItemsEverySecond, 1000);
     }
 
